@@ -1,0 +1,170 @@
+\documentclass[12pt,letterpaper]{article}
+
+\usepackage{graphicx}
+\usepackage[a4paper, margin=2cm]{geometry}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{array}
+\usepackage{indentfirst}
+
+\title{Student Performance Prediction Using Machine Learning}
+\author{Faturachman Yusup}
+\date{18 January 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+This experiment focuses on supervised machine learning for a classification problem. The objective is to predict student performance categories based on several academic and personal factors such as study hours, previous scores, sleep duration, and participation in extracurricular activities. By using labeled data, the model learns the relationship between input features and the target class, then applies this knowledge to unseen data.
+\newline
+\newline
+\indent In this project, a real-world student performance dataset obtained from Kaggle is used. The dataset is preprocessed, split into training and testing sets, and evaluated using accuracy as the main performance metric. Two classification experiments are conducted using different machine learning approaches: Random Forest and K-Nearest Neighbors (KNN). The goal of this report is to demonstrate the basic workflow of supervised machine learning, compare model performance, and analyze the strengths and limitations of each approach.
+
+\section{Dataset Description}
+\subsection{Dataset Overview}
+The dataset used in this project is the \textit{Student Performance} dataset obtained from Kaggle. It contains academic and lifestyle-related information of students and is designed to analyze factors that may influence student performance. The dataset consists of 10,000 student records with a total of six attributes.
+All records in the dataset are complete, with no missing values. The dataset includes both numerical and categorical variables, making it suitable for supervised classification tasks. Due to its clean structure and realistic features, the dataset is appropriate for introductory machine learning experiments.
+\subsection{Features and Target Variable}
+The dataset consists of five input features and one target variable. The input features are used to predict student performance, while the target variable represents the outcome to be classified.
+\newline
+\newline
+\newline
+\newline
+\newline
+\newline
+\newline
+\newline
+\newline
+\newline
+The features used in this study are described as follows:
+\begin{table}[H]
+  \centering
+  \label{tab:dataset_features}
+  \begin{tabular}{
+    p{5cm}
+    p{3cm}
+    >{\raggedright\arraybackslash}p{7.5cm}
+  }
+  \toprule
+  \textbf{Feature Name} & \textbf{Type} & \textbf{Description} \\
+  \midrule
+  Hours Studied & Numerical & Number of hours spent studying. \\
+  Previous Scores & Numerical & Previous academic scores. \\
+  Extracurricular Activities & Categorical & Participation in extracurricular activities (Yes or No). \\
+  Sleep Hours & Numerical & Average number of sleeping hours per day. \\
+  Sample Question Papers Practiced & Numerical & Number of practice question papers completed. \\
+  Performance Category & Categorical & Target variable (Low, Medium, High). \\
+  \bottomrule
+  \end{tabular}
+  \caption{Description of dataset features}
+\end{table}
+
+The original target variable, \textbf{Performance Index}, is a numerical score ranging from 0 to 100. For the purpose of classification, this continuous variable was transformed into three categorical performance levels:
+\begin{itemize}
+  \item \textbf{Low}: Performance Index between 0 and 40
+  \item \textbf{Medium}: Performance Index between 41 and 70
+  \item \textbf{High}: Performance Index between 71 and 100
+\end{itemize}
+
+This transformation allows the problem to be treated as a multi-class classification task, where the goal is to predict the performance category of a student based on the given features.
+
+\section{Machine Learning Methodology}
+
+This project follows a standard supervised machine learning workflow, starting from data preprocessing, model training, prediction, and finally evaluation. The objective is to classify student performance into predefined categories based on selected input features.
+
+\subsection{Data Preprocessing}
+Before training the models, several preprocessing steps were applied to prepare the dataset. The categorical feature \textit{Extracurricular Activities} was converted into numerical form using label encoding, where \textit{Yes} was mapped to 1 and \textit{No} was mapped to 0. This step is necessary because most machine learning algorithms require numerical input.
+In addition, the original continuous target variable \textit{Performance Index} was transformed into three categorical classes: Low, Medium, and High. This conversion allows the problem to be treated as a multi-class classification task.
+For the K-Nearest Neighbors (KNN) algorithm, feature scaling was applied using StandardScaler. Feature scaling is important for distance-based algorithms to ensure that all features contribute equally to the distance calculation.
+
+\subsection{Train-Test Split}
+The dataset was divided into two subsets: a training set and a testing set. A total of 80\% of the data was used for training the models, while the remaining 20\% was reserved for testing. A stratified splitting strategy was applied to maintain the original class distribution in both subsets. This approach helps produce a more reliable evaluation of model performance.
+
+\subsection{Classification Algorithms}
+Two different classification algorithms were used in this study to conduct comparative experiments:
+
+\begin{itemize}
+  \item \textbf{Random Forest Classifier}: An ensemble learning method that builds multiple decision trees and combines their predictions to improve accuracy and robustness.
+  \item \textbf{K-Nearest Neighbors (KNN)}: A simple, distance-based algorithm that classifies data points based on the majority class among their nearest neighbors.
+\end{itemize}
+
+For the KNN model, multiple values of \(k\) were tested to identify the optimal number of neighbors.
+
+\subsection{Evaluation Metric}
+Model performance was evaluated using \textbf{accuracy}, which measures the proportion of correctly classified instances out of the total number of predictions. Accuracy was chosen because the dataset is relatively balanced across classes and the metric is easy to interpret for introductory machine learning tasks.
+
+\section{Experimental Results}
+This section presents the results obtained from the two classification experiments conducted in this study. The performance of each model was evaluated using accuracy on the testing dataset.
+
+\subsection{Experiment 1: Random Forest Classifier}
+In the first experiment, a Random Forest classifier was trained using the training dataset and evaluated on the testing dataset. The model achieved an accuracy of \textbf{94.05\%}, correctly classifying 1,881 out of 2,000 test samples.
+The classification results show strong performance across all three performance categories (Low, Medium, and High). The confusion matrix indicates that most predictions were correctly classified, with only a small number of misclassifications occurring mainly between the Medium and neighboring categories.
+
+\subsection{Experiment 2: K-Nearest Neighbors}
+In the second experiment, a K-Nearest Neighbors (KNN) classifier was used with feature scaling applied. Several values of \(k\) were tested to determine the optimal number of neighbors. Among the tested values, \(k = 11\) produced the best performance.
+The final KNN model achieved an accuracy of \textbf{92.10\%}, correctly classifying 1,842 out of 2,000 test samples. Although the performance is slightly lower than the Random Forest model, the KNN classifier still demonstrates strong predictive capability for this dataset.
+
+\subsection{Model Comparison}
+
+\begin{table}[H]
+  \centering
+  \label{tab:model_accuracy}
+  \begin{tabular}{|l|c|}
+    \hline
+    \textbf{Model} & \textbf{Accuracy (\%)} \\
+    \hline
+    Random Forest Classifier & 94.05 \\
+    K-Nearest Neighbors (k = 11) & 92.10 \\
+    \hline
+  \end{tabular}
+  \caption{Accuracy comparison of classification models}
+\end{table}
+
+A comparison of both models shows that the Random Forest classifier outperformed the KNN classifier by approximately 1.95 percentage points in accuracy. While both models achieved accuracy above 90\%, Random Forest produced more consistent predictions across all classes.
+
+\section{Analysis and Discussion}
+The experimental results show that both machine learning models performed well on the student performance classification task, achieving accuracy values above 90\%. This indicates that the selected features are highly informative and have a strong relationship with student performance categories.
+The Random Forest classifier achieved higher accuracy compared to the K-Nearest Neighbors model. This can be attributed to Random Forest's ability to capture complex, non-linear relationships between features by combining multiple decision trees. In addition, Random Forest is more robust to noise and does not rely heavily on feature scaling, making it well-suited for datasets with mixed feature importance.
+
+\begin{table}[H]
+  \centering
+  \label{tab:feature_importance}
+  \begin{tabular}{|l|c|}
+    \hline
+    \textbf{Feature} & \textbf{Importance (\%)} \\
+    \hline
+    Previous Scores & 74.59 \\
+    Hours Studied & 17.13 \\
+    Sample Question Papers Practiced & 4.21 \\
+    Sleep Hours & 3.03 \\
+    Extracurricular Activities & 1.04 \\
+    \hline
+  \end{tabular}
+  \caption{Feature importance from Random Forest model}
+\end{table}
+
+In contrast, the KNN classifier relies on distance calculations between data points. Although feature scaling improved its performance, KNN is more sensitive to the choice of the parameter \(k\) and to the distribution of the data. Misclassifications mainly occurred near the boundaries between performance categories, especially between Medium and neighboring classes.
+One advantage of KNN is its simplicity and ease of understanding, which makes it suitable for educational purposes. However, Random Forest provides better overall performance and additional insights such as feature importance, which can help identify the most influential factors affecting student performance.
+Despite the strong results, this study has some limitations. The target variable was converted into discrete categories, which may lead to information loss compared to predicting continuous scores. Additionally, the evaluation was based primarily on accuracy, which may not fully capture performance differences across individual classes.
+\pagebreak
+\section{Conclusion}
+This experiment demonstrated the basic workflow of supervised machine learning for a classification problem. Using a student performance dataset, the study covered data preprocessing, feature selection, model training, prediction, and evaluation. Two classification algorithms, Random Forest and K-Nearest Neighbors, were implemented and compared based on accuracy.
+The results showed that both models performed well, with Random Forest achieving the highest accuracy of 94.05\%. This indicates that academic and lifestyle-related features such as previous scores and study hours play an important role in predicting student performance. Overall, this project provided practical experience with machine learning concepts and highlighted the strengths and limitations of different classification approaches.
+
+\section{Appendix}
+The complete implementation of this project is provided as a Jupyter Notebook submitted together with this report. The code includes data loading, preprocessing, feature encoding, model training, prediction, and evaluation for both Random Forest and K-Nearest Neighbors classifiers.
+\break
+
+The implementation was written in Python using the following libraries:
+\begin{itemize}
+  \item \textbf{pandas} for data manipulation
+  \item \textbf{numpy} for numerical operations
+  \item \textbf{scikit-learn} for machine learning models and evaluation
+\end{itemize}
+
+All code is well-commented to improve readability and to clearly demonstrate each step of the supervised machine learning workflow implemented in this study.
+
+\end{document}
