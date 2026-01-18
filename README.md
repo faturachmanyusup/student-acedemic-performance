@@ -9,7 +9,6 @@ This document provides a detailed breakdown of the machine learning analysis res
 - **Total samples**: 10,000 student records
 - **Total features**: 6 columns
 - **Dimensions**: 10,000 rows × 6 columns
-- **Source**: [Kaggle: Student Performance](https://www.kaggle.com/datasets/neurocipher/student-performance)
 
 ### Dataset Columns
 The dataset contains the following features:
@@ -35,6 +34,9 @@ The dataset contains the following features:
 
 ### Missing Values
 ✅ **No missing values** - All 10,000 records are complete across all 6 features.
+
+### Dataset Source
+[Md Huzaifa Ansari. (2025). Student Performance [Data set]. Kaggle.](https://doi.org/10.34740/kaggle/dsv/14126328)
 
 ## 2. Data Preprocessing
 
